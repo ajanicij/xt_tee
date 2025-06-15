@@ -15,6 +15,9 @@ in development.
 All in all:
 - It took about a few hours, which is probably an order of magnitude less
   that what it would have taken me by hand.
+- I developed in two ChatGPT sessions:
+  - Source code
+  - Build system for CMake
 - There was only one thing I had to fix in ChatGPT-generated code. It was
   in the code that processes command-line parameters.
 
