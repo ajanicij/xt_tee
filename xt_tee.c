@@ -125,6 +125,7 @@ void get_timestamp_for_output(char *buffer, size_t size, FILE *fp) {
 }
 
 void print_help(const char *prog_name) {
+    printf("xt_tee is an extended version of tee command that prepends timestamps to its output.\n");
     printf("Usage: %s [OPTIONS] [FILE]...\n\n", prog_name);
     printf("Reads from standard input and writes to standard output and files.\n\n");
     printf("Options:\n");
