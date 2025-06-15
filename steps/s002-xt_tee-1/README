@@ -1,0 +1,30 @@
+Q:
+Hi, I would like to write a program in C language that is an extension of Unix program tee. It would have all command line options that tee has, but also options that tell it to add timestamp at the beginning of every line.
+
+A:
+Great idea! Extending the Unix tee command in C to include timestamps is a useful enhancement for logging purposes. Below is a plan followed by a working implementation in C that:
+
+    Replicates tee behavior (reads from stdin, writes to stdout and files).
+
+    Supports common tee options:
+
+        -a to append to files.
+
+        -i to ignore SIGINT.
+
+    Adds a custom option:
+
+        --timestamp (or -t) to prefix each line with a timestamp.
+
+Features of the Extended tee
+
+    Read from standard input.
+
+    Write to standard output and to any number of files.
+
+    -a/--append: Append to the files rather than overwrite.
+
+    -i/--ignore-interrupts: Ignore interrupt signals (SIGINT).
+
+    -t/--timestamp: Prepend a timestamp to each line.
+

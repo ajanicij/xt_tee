@@ -1,0 +1,10 @@
+[+0000.001] always
+[+0000.001] auto
+[+0000.001] Makefile
+[+0000.001] Makefile~
+[+0000.001] output.txt
+[+0000.001] README
+[+0000.001] README~
+[+0000.001] xt_tee
+[+0000.001] xt_tee.c
+[+0000.001] xt_tee.c~

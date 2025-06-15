@@ -1,0 +1,60 @@
+Help option would be great.
+ChatGPT said:
+
+Great choice — adding a --help (-h) option makes the program much more user-friendly and self-documenting.
+✅ New Option
+Feature	Long Option	Short	Description
+Show help	--help	-h	Display usage and exit
+🧾 Help Message Example
+
+Usage: xt_tee [OPTIONS] [FILE]...
+
+Reads from standard input and writes to standard output and files.
+
+Options:
+  -a, --append                 Append to files instead of overwriting
+  -i, --ignore-interrupts     Ignore SIGINT (Ctrl+C)
+  -t, --timestamp=TYPE        Add timestamp: 'absolute' or 'relative'
+  -T, --timestamp-target=DEST Where to apply timestamp: 'stdout', 'files', 'both'
+  -C, --color[=WHEN]          Colorize timestamps on stdout: 'always', 'never', 'auto'
+  -h, --help                  Show this help message and exit
+
+🧩 Code Changes
+🔁 Add --help to the options array:
+
+struct option long_options[] = {
+    {"append",            no_argument,       0, 'a'},
+    {"ignore-interrupts", no_argument,       0, 'i'},
+    {"timestamp",         required_argument, 0, 't'},
+    {"timestamp-target",  required_argument, 0, 'T'},
+    {"color",             optional_argument, 0, 'C'},
+    {"help",              no_argument,       0, 'h'},
+    {0, 0, 0, 0}
+};
+
+🖨️ Add a print_help() function:
+
+void print_help(const char *prog_name) {
+    printf("Usage: %s [OPTIONS] [FILE]...\n\n", prog_name);
+    printf("Reads from standard input and writes to standard output and files.\n\n");
+    printf("Options:\n");
+    printf("  -a, --append                 Append to files instead of overwriting\n");
+    printf("  -i, --ignore-interrupts     Ignore SIGINT (Ctrl+C)\n");
+    printf("  -t, --timestamp=TYPE        Add timestamp: 'absolute' or 'relative'\n");
+    printf("  -T, --timestamp-target=DEST Where to apply timestamp: 'stdout', 'files', 'both'\n");
+    printf("  -C, --color[=WHEN]          Colorize timestamps on stdout: 'always', 'never', 'auto'\n");
+    printf("  -h, --help                  Show this help message and exit\n");
+}
+
+🔁 Handle -h/--help in the switch:
+
+Add this case to your main switch (opt):
+
+case 'h':
+    print_help(argv[0]);
+    exit(EXIT_SUCCESS);
+
+🧪 Try It:
+
+./xt_tee --help
+./xt_tee -h

@@ -1,0 +1,39 @@
+Oh, and please another option: I want the user to have a choice whether he wants to add timestamps to standard output, file, or both
+
+Perfect — let's add targeted timestamping, so the user can control where the timestamps go:
+✅ Updated Requirement
+
+Add a new option:
+
+--timestamp-target=both|stdout|files
+
+It controls which outputs (stdout, file(s), or both) receive the timestamp.
+
+Full Feature Summary
+Option	Meaning
+-a, --append	Append to file instead of overwriting
+-i, --ignore-interrupts	Ignore SIGINT
+-t, --timestamp=...	Timestamp type: absolute, relative
+--timestamp-target=...	Where to apply timestamp: stdout, files, or both
+🧠 Design
+
+We'll:
+
+    Add a new enum: TimestampTarget
+
+    Before writing a line to each destination, check whether the current target (stdout/file) needs a timestamp
+
+    Apply timestamp only when needed
+
+Example Usage
+
+# Only add timestamp to file
+echo "hello" | ./xt_tee --timestamp=relative --timestamp-target=files output.txt
+
+# Only timestamp on screen, not in file
+cat input.txt | ./xt_tee -a --timestamp=absolute --timestamp-target=stdout log.txt
+
+# Timestamp both
+some_command | ./xt_tee --timestamp=relative --timestamp-target=both log.txt
+
+

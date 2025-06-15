@@ -1,0 +1,24 @@
+Wow! Please write an auto-install script.
+ChatGPT said:
+
+Absolutely — here's a clean, portable auto-install script that:
+
+✅ Compiles xt_tee
+✅ Installs it to /usr/local/bin
+✅ Installs the man page to /usr/local/share/man/man1
+✅ Updates the man database
+✅ Verifies the installation
+🧾 install_xt_tee.sh
+
+Save this as install_xt_tee.sh and make it executable (chmod +x install_xt_tee.sh).
+
+Usage
+
+chmod +x install_xt_tee.sh
+./install_xt_tee.sh
+
+🧪 After Install, Try:
+
+xt_tee --help
+xt_tee --version
+man xt_tee

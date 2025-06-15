@@ -1,0 +1,40 @@
+s001-boilerplate
+Boilerplate C program and Makefile
+
+s002-xt_tee-1
+First version of xt_tee
+
+s003-xt_tee-relative-timestamps
+Added option to use absolute or relative timestamps.
+
+s004-targeted-timestamping
+Added --timestamp and --timestamp-targe
+
+s005-colored-timestamps
+Added optional color to the timestamps.
+ChatGPT made a small bug in processing command line arguments.
+
+s006-short-options
+Defined short options -T for timestamp-target and -C for color.
+
+s007-help
+Added -h|--help option.
+
+s008-version
+Added -v|--version option to print program version.
+
+s009-manpage
+Added manpage.
+
+s010-install-script
+Install shell script.
+
+s011-cmake-basic
+Basic CMake project
+
+s012-cmake-with-ctest
+Like s011-cmake-basic, but there is no test subdirectory, everything
+is in the same directory.
+
+s013-cmake-install
+Like s012-cmake-with-ctest, but with installation steps for cpack.

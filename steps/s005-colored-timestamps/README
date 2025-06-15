@@ -1,0 +1,29 @@
+Would you like to:
+
+    Log to stderr instead of stdout?
+
+    Add colors for timestamps?
+
+    Compress log output?
+
+Let me know — I can help extend it further!
+You said:
+It is a great idea to add colors for timestamps! So please add another option to add color to stamps, but only for writing to standard output.
+ChatGPT said:
+
+Awesome — colored timestamps are a great usability enhancement when viewing output in a terminal. Let's add that next!
+✅ New Feature
+
+Add this option:
+
+--color[=always|never|auto]
+
+Purpose: Apply ANSI color to timestamps on stdout only.
+🎯 Behavior Summary
+Value	Meaning
+always	Always colorize timestamps on stdout
+never	Never colorize timestamps
+auto	Color if stdout is a terminal (default)
+
+Only affects stdout, never modifies timestamps in files.
+

@@ -1,0 +1,83 @@
+Since you offer, please add short flag versions, like -C for color etc.
+
+Absolutely — short flags make the tool much more ergonomic. Let’s assign intuitive short options for the new and existing features:
+✅ Updated Command-Line Flags
+Feature	Long Option	Short Option
+Append mode	--append	-a
+Ignore interrupts	--ignore-interrupts	-i
+Timestamp type	--timestamp=TYPE	-t TYPE
+Timestamp target	--timestamp-target=TARGET	-T TARGET
+Color output	--color[=WHEN]	-C[=WHEN]
+
+    -T is for timestamp target (like files/stdout/both)
+
+    -C is for color, with optional argument (like always, never, auto)
+
+🧪 Example Usage
+
+./xt_tee -a -t relative -T stdout -C=always logfile.txt
+
+./xt_tee -i -t absolute -C input.txt
+
+🧩 Code Update for Short Options
+🔁 Replace your getopt_long() definitions with:
+
+struct option long_options[] = {
+    {"append",            no_argument,       0, 'a'},
+    {"ignore-interrupts", no_argument,       0, 'i'},
+    {"timestamp",         required_argument, 0, 't'},
+    {"timestamp-target",  required_argument, 0, 'T'},
+    {"color",             optional_argument, 0, 'C'},
+    {0, 0, 0, 0}
+};
+
+📦 And in your while ((opt = getopt_long(...)) loop, update the switch block:
+
+switch (opt) {
+    case 'a':
+        append_mode = 1;
+        break;
+    case 'i':
+        ignore_interrupts = 1;
+        break;
+    case 't':
+        if (strcmp(optarg, "absolute") == 0)
+            timestamp_type = ABSOLUTE_TIMESTAMP;
+        else if (strcmp(optarg, "relative") == 0)
+            timestamp_type = RELATIVE_TIMESTAMP;
+        else {
+            fprintf(stderr, "Invalid --timestamp type: %s\n", optarg);
+            exit(EXIT_FAILURE);
+        }
+        break;
+    case 'T':
+        if (strcmp(optarg, "stdout") == 0)
+            timestamp_target = TARGET_STDOUT;
+        else if (strcmp(optarg, "files") == 0)
+            timestamp_target = TARGET_FILES;
+        else if (strcmp(optarg, "both") == 0)
+            timestamp_target = TARGET_BOTH;
+        else {
+            fprintf(stderr, "Invalid --timestamp-target: %s\n", optarg);
+            exit(EXIT_FAILURE);
+        }
+        break;
+    case 'C':
+        if (!optarg || strcmp(optarg, "auto") == 0)
+            color_mode = COLOR_AUTO;
+        else if (strcmp(optarg, "always") == 0)
+            color_mode = COLOR_ALWAYS;
+        else if (strcmp(optarg, "never") == 0)
+            color_mode = COLOR_NEVER;
+        else {
+            fprintf(stderr, "Invalid --color value: %s\n", optarg);
+            exit(EXIT_FAILURE);
+        }
+        break;
+    default:
+        fprintf(stderr,
+            "Usage: %s [-a] [-i] [-t absolute|relative] [-T stdout|files|both] [-C[=always|never|auto]] [files...]\n",
+            argv[0]);
+        exit(EXIT_FAILURE);
+}
+

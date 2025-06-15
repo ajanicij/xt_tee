@@ -1,0 +1,28 @@
+But also the timestamp added can be absolute or relative: absolute is like you have just written, and relative is the time in milliseconds from the start of the program.
+
+Great addition! Supporting both absolute and relative timestamps adds a lot of flexibility, especially for debugging or performance tracing.
+
+Updated Requirements
+
+Your program now supports:
+
+    --timestamp=absolute: Use wall-clock time (e.g., [2025-06-13 14:35:00])
+
+    --timestamp=relative: Milliseconds since program start (e.g., [+00123.456])
+
+    Default (no timestamp): behaves like standard tee
+
+    Still supports -a (append) and -i (ignore SIGINT)
+
+🛠️ Design Notes
+
+We'll:
+
+    Parse --timestamp=absolute or --timestamp=relative
+
+    Store program_start time using clock_gettime()
+
+    Use that for relative timestamps
+
+    Use strftime() for absolute ones
+

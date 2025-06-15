@@ -1,0 +1,17 @@
+This is actually already more than what I had in mind. One more thing would make it perfect for me: can you just please add a short manpage document?
+ChatGPT said:
+
+Absolutely! Here’s a clean, short man page for your xt_tee tool — modeled after standard Unix man page conventions and customized with all the features you’ve added.
+
+How to Install the Man Page
+
+    Save it as xt_tee.1
+
+    Move it to a man directory (e.g., /usr/local/share/man/man1/)
+
+sudo cp xt_tee.1 /usr/local/share/man/man1/
+sudo mandb
+
+    Use it:
+
+man xt_tee

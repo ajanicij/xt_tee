@@ -1,0 +1,66 @@
+.TH XT_TEE 1 "June 2025" "xt_tee 1.0.3" "User Commands"
+
+.SH NAME
+xt_tee \- read from standard input and write to standard output and files, with optional timestamps
+
+.SH SYNOPSIS
+.B xt_tee
+[\fIOPTIONS\fR] [\fIFILE...\fR]
+
+.SH DESCRIPTION
+.B xt_tee
+copies standard input to standard output and to the specified files, similar to the Unix
+.BR tee (1)
+command. It also optionally adds timestamps to each line, either in absolute or relative mode.
+
+.SH OPTIONS
+
+.TP
+.B \-a, \-\-append
+Append to the given files, do not overwrite.
+
+.TP
+.B \-i, \-\-ignore-interrupts
+Ignore interrupt signals (SIGINT).
+
+.TP
+.B \-t, \-\-timestamp=\fIabsolute|relative\fR
+Add a timestamp at the beginning of each line. 
+Absolute timestamps use the current time, while relative timestamps start from zero at program launch.
+
+.TP
+.B \-T, \-\-timestamp-target=\fIstdout|files|both\fR
+Specify whether timestamps should be added to standard output, files, or both.
+
+.TP
+.B \-C, \-\-color[=\fIalways|never|auto\fR]
+Colorize timestamps in standard output. Defaults to 'auto' (enabled if output is a terminal).
+
+.TP
+.B \-h, \-\-help
+Display help and exit.
+
+.TP
+.B \-v, \-\-version
+Display version information and exit.
+
+.SH EXAMPLES
+
+.TP
+.B xt_tee -t relative -T stdout -C always log.txt
+Add relative timestamps with colored output on stdout only, writing input to log.txt.
+
+.TP
+.B xt_tee -a -t absolute -T both log.txt
+Append to log.txt and print to stdout with absolute timestamps on both.
+
+.SH AUTHOR
+Written by Aleksandar Janicijevic, with help from ChatGPT.
+
+.SH LICENSE
+MIT License.
+
+.SH SEE ALSO
+.BR tee (1),
+.BR date (1),
+.BR cat (1)
